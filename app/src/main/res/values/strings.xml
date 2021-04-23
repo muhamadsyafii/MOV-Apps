@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">MOV Apps</string>
+    >
+
+    <!--On Boarding-->
+    <string name="txt_tite_boarding_one">Now Playing</string>
+    <string name="txt_desc_boarding_one">Lebih mudah untuk mengetahui film yang sedang tampil</string>
+    <string name="txt_tite_boarding_two">Pre Sale</string>
+    <string name="txt_desc_boarding_two">Tidak khawatir ketinggalan update film terbaru</string>
+    <string name="txt_tite_boarding_three">Cashless</string>
+    <string name="txt_desc_boarding_three">Gunakan e-wallet untuk transaksi tiket nonton</string>
+
+    <string name="txt_lewati_perkenalan">Lewati Perkenalan</string>
+    <string name="txt_lanjutkan">Lanjutkan</string>
+    <string name="txt_memulai">Memulai</string>
+    <string name="txt_signin">Sign In</string>
+    <string name="txt_signup">Sign Up</string>
+    <string name="txt_username">Username</string>
+    <string name="txt_password">Password</string>
+    <string name="txt_masuk_akun">Masuk Akun</string>
+    <string name="txt_daftar_akun">Daftar Akun Baru</string>
+    <string name="txt_nama">Nama</string>
+    <string name="txt_email">Email Address</string>
+    <string name="txt_photo">Photo</string>
+    <string name="txt_welcome">Welcome,</string>
+    <string name="txt_simpan_dan_lanjutkan">Simpan Dan Lanjutkan</string>
+    <string name="txt_upload_nanti">Upload Nanti</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_now_playing">Now Playing</string>
+    <string name="text_coming_soon">Coming Soon</string>
+    <string name="txt_who_played">Who’s Played</string>
+    <string name="txt_pilih_bangku">Pilih Bangku</string>
+    <string name="txt_beli_tiket">Beli Tiket</string>
+    <string name="txt_checkout">Checkout</string>
+    <string name="txt_batalkan">Batalkan</string>
+    <string name="txt_pay_now">Bayar Sekarang</string>
+    <string name="txt_when">When</string>
+    <string name="txt_date_time"><![CDATA[Date & Time]]></string>
+    <string name="txt_cinema">Cinema</string>
+    <string name="txt_edit_profile">Edit Profile</string>
+    <string name="txt_simpan_data_baru">Simpan Data Baru</string>
+
+</resources>
