@@ -31,6 +31,11 @@ fun <T> Fragment.openActivityDetail(destination : Class<T>, bundleKey : String, 
     intent.putExtra(bundleKey, id)
     startActivity(intent)
 }
+/*Open Activity from fragment*/
+fun <T> Fragment.openActivity(destination : Class<T>){
+    val intent = Intent(requireContext(), destination)
+    startActivity(intent)
+}
 
 /*Open Activity*/
 fun <T> Activity.openActivity(destination : Class<T>){

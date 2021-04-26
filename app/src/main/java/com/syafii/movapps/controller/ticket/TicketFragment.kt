@@ -14,26 +14,31 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.*
+import com.google.gson.Gson
 import com.syafii.movapps.databinding.FragmentTicketBinding
 import com.syafii.movapps.model.Film
 import com.syafii.movapps.util.ItemClickListener
+import com.syafii.movapps.util.constant.MOVIE_DATA
 import com.syafii.movapps.util.db.SharedPreference
+import com.syafii.movapps.util.openActivity
 import com.syafii.movapps.util.showToast
 
 class TicketFragment : Fragment() {
 
-    private lateinit var binding : FragmentTicketBinding
-    private lateinit var sharedPreference : SharedPreference
-    private lateinit var dbReference : DatabaseReference
+    private lateinit var binding: FragmentTicketBinding
+    private lateinit var sharedPreference: SharedPreference
+    private lateinit var dbReference: DatabaseReference
     private var filmList = ArrayList<Film>()
 
 
-    private val adapter = TodayAdapter(object : ItemClickListener<Film>{
+    private val adapter = TodayAdapter(object : ItemClickListener<Film> {
         override fun onItemClick(data: Film) {
-            showToast("Clikced ${data.judul}")
+            openActivity(TicketPurchasedActivity::class.java)
+            sharedPreference.saveString(MOVIE_DATA, Gson().toJson(data))
         }
 
     })
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,7 +50,8 @@ class TicketFragment : Fragment() {
 
         getData()
 
-        binding.rvToday.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvToday.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         return binding.root
     }
@@ -66,6 +72,7 @@ class TicketFragment : Fragment() {
                     }
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
                 showToast(error.message)
             }

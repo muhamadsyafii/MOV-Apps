@@ -9,7 +9,6 @@ package com.syafii.movapps.controller.ticket
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -50,7 +49,15 @@ class TicketPurchasedActivity : AppCompatActivity() {
         binding.rvItemSeat.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvItemSeat.isNestedScrollingEnabled = false
-        adapter.setTicketAdapter(dataList)
+
+        //check condition if dataList empty or not
+        if (dataList.size > 0) {
+            adapter.setTicketAdapter(dataList)
+        } else {
+            dataList.add(Checkout("A1", "50000"))
+            dataList.add(Checkout("A2", "50000"))
+            adapter.setTicketAdapter(dataList)
+        }
         binding.rvItemSeat.adapter = adapter
 
         binding.mToolbarBack.setOnClickListener {
