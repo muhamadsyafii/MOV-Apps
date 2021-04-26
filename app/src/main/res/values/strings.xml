@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">MOV Apps</string>
-    >
-
     <!--On Boarding-->
     <string name="txt_tite_boarding_one">Now Playing</string>
     <string name="txt_desc_boarding_one">Lebih mudah untuk mengetahui film yang sedang tampil</string>
@@ -40,5 +38,8 @@
     <string name="txt_cinema">Cinema</string>
     <string name="txt_edit_profile">Edit Profile</string>
     <string name="txt_simpan_data_baru">Simpan Data Baru</string>
+    <string name="txt_my_wallet">My Wallet</string>
+    <string name="txt_change_language">Change Language</string>
+    <string name="txt_help">Help</string>
 
 </resources>

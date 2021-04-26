@@ -28,9 +28,11 @@ import com.syafii.movapps.controller.detailmovie.DetailMovieActivity
 import com.syafii.movapps.controller.main.MainActivity
 import com.syafii.movapps.databinding.FragmentHomeBinding
 import com.syafii.movapps.model.Film
+import com.syafii.movapps.model.User
 import com.syafii.movapps.util.ItemClickListener
 import com.syafii.movapps.util.constant.MOVIE_DATA
 import com.syafii.movapps.util.currency
+import com.syafii.movapps.util.db.DialogUtil
 import com.syafii.movapps.util.db.SharedPreference
 import com.syafii.movapps.util.openActivityDetail
 import com.syafii.movapps.util.showToast
@@ -104,20 +106,9 @@ class HomeFragment : Fragment() {
 
         //this is button profile for show image after click
         binding.btnProfile.setOnClickListener {
-            val data = sharedPreference.getCurrentUser()
-            val dialog = Dialog(requireContext(), R.style.FullHeightDialog)
-            dialog.setContentView(R.layout.dialog_show_qr_code)
-            val img = dialog.findViewById<ImageView>(R.id.im_qr_code)
-            val btn = dialog.findViewById<Button>(R.id.btn_action)
-            Glide.with(requireContext())
-                .load(data?.url)
-                .error(R.drawable.ic_profile)
-                .into(img)
-
-            btn.setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.show()
+            val data : User? = sharedPreference.getCurrentUser()
+            val dialogUtil = DialogUtil()
+            dialogUtil.showDialog(requireContext(), data!!)
         }
 
         return binding.root
@@ -161,7 +152,7 @@ class HomeFragment : Fragment() {
 
     //this is method for update profile
     private fun updateProfile() {
-        val user = sharedPreference.getCurrentUser()
+        val user : User? = sharedPreference.getCurrentUser()
 
         binding.tvName.text = user!!.nama
         binding.tvSaldo.text = user.saldo
