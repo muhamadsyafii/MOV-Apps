@@ -8,21 +8,19 @@
 package com.syafii.movapps.controller.checkout
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.syafii.movapps.databinding.ActivityCheckoutBinding
 import com.syafii.movapps.model.Checkout
+import com.syafii.movapps.model.Film
 import com.syafii.movapps.model.arrayFromData
+import com.syafii.movapps.util.constant.DATA_SEAT
 import com.syafii.movapps.util.constant.MOVIE_DATA
 import com.syafii.movapps.util.currency
 import com.syafii.movapps.util.db.SharedPreference
 import com.syafii.movapps.util.openActivity
-import java.text.NumberFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
 class CheckoutActivity : AppCompatActivity() {
     private val TAG = CheckoutActivity::class.java.simpleName
@@ -38,7 +36,8 @@ class CheckoutActivity : AppCompatActivity() {
         sharedPreference = SharedPreference(this)
 
         //this is get data from previous activity and SharedPreference
-        dataList = arrayFromData(intent.getStringExtra(MOVIE_DATA))
+        dataList = arrayFromData(intent.getStringExtra(DATA_SEAT))
+        val data: Film = Gson().fromJson(intent.getStringExtra(MOVIE_DATA), Film::class.java)
         val user = sharedPreference.getCurrentUser()
 
 
@@ -50,8 +49,6 @@ class CheckoutActivity : AppCompatActivity() {
         if (user != null) {
             currency(user.saldo.toDouble(), binding.tvSaldo)
         }
-
-        Log.e(TAG, "data List  ${Gson().toJson(dataList)}")
 
         adapter = CheckoutAdapter(dataList)
         binding.rvItemSeat.layoutManager =
@@ -65,6 +62,8 @@ class CheckoutActivity : AppCompatActivity() {
 
         binding.btnPayNow.setOnClickListener {
             openActivity(CheckoutSuccessActivity::class.java)
+            sharedPreference.saveString(DATA_SEAT, Gson().toJson(dataList))
+            sharedPreference.saveString(MOVIE_DATA, Gson().toJson(data))
             finish()
         }
 

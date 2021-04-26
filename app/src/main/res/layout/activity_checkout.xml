@@ -88,13 +88,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:drawableStart="@drawable/ic_movie"
                 android:drawablePadding="4dp"
                 android:gravity="center_vertical"
                 android:text="@string/txt_cinema"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                app:layout_constraintTop_toBottomOf="@+id/textView18"
+                app:drawableStartCompat="@drawable/ic_movie" />
 
             <TextView
                 android:id="@+id/tv_date_time"
@@ -173,7 +173,7 @@
                 android:layout_marginEnd="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="vertical"
-                tools:itemCount="4"
+                tools:itemCount="50"
                 tools:listitem="@layout/item_price_seat"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.syafii.movapps.R
 import com.syafii.movapps.controller.main.MainActivity
+import com.syafii.movapps.controller.ticket.TicketPurchasedActivity
 import com.syafii.movapps.databinding.ActivityCheckoutSuccessBinding
 import com.syafii.movapps.util.openActivity
 import com.syafii.movapps.util.showToast
@@ -29,7 +30,11 @@ class CheckoutSuccessActivity : AppCompatActivity() {
         }
 
         binding.btnLookTicket.setOnClickListener {
-            showToast("Clicked Lihat Tiket")
+            openActivity(TicketPurchasedActivity::class.java)
+
         }
+    }
+
+    override fun onBackPressed() {
     }
 }

@@ -7,6 +7,7 @@
 
 package com.syafii.movapps.controller.chooseseat
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -343,7 +344,10 @@ class ChooseSeatActivity : AppCompatActivity(){
 
         binding.btnPayTicket.setOnClickListener {
             if (total !=0){
-                openActivity(CheckoutActivity::class.java, MOVIE_DATA, Gson().toJson(dataList))
+                val move = Intent(this, CheckoutActivity::class.java)
+                move.putExtra(DATA_SEAT, Gson().toJson(dataList))
+                move.putExtra(MOVIE_DATA,  Gson().toJson(data))
+                startActivity(move)
             }else{
                 showToast("Please Select seat first")
             }

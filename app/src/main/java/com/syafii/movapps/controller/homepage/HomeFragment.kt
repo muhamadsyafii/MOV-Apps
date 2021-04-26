@@ -8,11 +8,13 @@
 package com.syafii.movapps.controller.homepage
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -103,23 +105,19 @@ class HomeFragment : Fragment() {
         //this is button profile for show image after click
         binding.btnProfile.setOnClickListener {
             val data = sharedPreference.getCurrentUser()
-            val builder = AlertDialog.Builder(requireContext())
-            val layoutInflater = LayoutInflater.from(requireContext())
-            val view = layoutInflater.inflate(R.layout.dialog_image, null)
-            val image = view.findViewById<ImageView>(R.id.im_pic_dialog)
-            Glide.with(requireContext()).load(data?.url).into(image)
-            builder.setView(view)
-            builder.setPositiveButton("Close") { dialog, which ->
+            val dialog = Dialog(requireContext(), R.style.FullHeightDialog)
+            dialog.setContentView(R.layout.dialog_show_qr_code)
+            val img = dialog.findViewById<ImageView>(R.id.im_qr_code)
+            val btn = dialog.findViewById<Button>(R.id.btn_action)
+            Glide.with(requireContext())
+                .load(data?.url)
+                .error(R.drawable.ic_profile)
+                .into(img)
+
+            btn.setOnClickListener {
                 dialog.dismiss()
             }
-            val alertDialog = builder.create()
-            alertDialog.show()
-
-            //this is for change the color in text color button
-            val button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
-            with(button) {
-                setTextColor(ContextCompat.getColor(requireContext(),R.color.colorBlue))
-            }
+            dialog.show()
         }
 
         return binding.root
