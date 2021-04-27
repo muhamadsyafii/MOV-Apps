@@ -7,15 +7,10 @@
 
 package com.syafii.movapps.controller.homepage
 
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -74,8 +69,13 @@ class HomeFragment : Fragment() {
         sharedPreference = SharedPreference(requireContext())
         dbReference = FirebaseDatabase.getInstance().getReference("Film")
 
-        updateProfile()
-        getData()
+        try {
+            updateProfile()
+            getData()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
 
         //this is add color load for swipe refresh6
         binding.swipeRefresh
@@ -87,8 +87,12 @@ class HomeFragment : Fragment() {
         //this is swipeRefresh for load again data
         binding.swipeRefresh.setOnRefreshListener {
             (Objects.requireNonNull(activity) as MainActivity).syncMember()
-            updateProfile()
-            getData()
+            try {
+                updateProfile()
+                getData()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
             binding.shimmerNowPlaying.visibility = View.VISIBLE
             binding.shimmerNowPlaying.startShimmer()
             binding.shimmerComingSoon.visibility = View.VISIBLE
@@ -106,7 +110,7 @@ class HomeFragment : Fragment() {
 
         //this is button profile for show image after click
         binding.btnProfile.setOnClickListener {
-            val data : User? = sharedPreference.getCurrentUser()
+            val data: User? = sharedPreference.getCurrentUser()
             val dialogUtil = DialogUtil()
             dialogUtil.showDialog(requireContext(), data!!)
         }
@@ -152,7 +156,7 @@ class HomeFragment : Fragment() {
 
     //this is method for update profile
     private fun updateProfile() {
-        val user : User? = sharedPreference.getCurrentUser()
+        val user: User? = sharedPreference.getCurrentUser()
 
         binding.tvName.text = user!!.nama
         binding.tvSaldo.text = user.saldo

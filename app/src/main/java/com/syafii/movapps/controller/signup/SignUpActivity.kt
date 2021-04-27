@@ -14,6 +14,7 @@ import com.syafii.movapps.controller.uploadphoto.UploadPhotoActivity
 import com.syafii.movapps.databinding.ActivitySignUpBinding
 import com.syafii.movapps.model.User
 import com.syafii.movapps.util.constant.NAME
+import com.syafii.movapps.util.db.SharedPreference
 import com.syafii.movapps.util.openActivity
 import com.syafii.movapps.util.showToast
 
@@ -23,6 +24,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var dbReference: DatabaseReference
     private lateinit var dbDatabase: DatabaseReference
+    private lateinit var sharedPreference: SharedPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,7 @@ class SignUpActivity : AppCompatActivity() {
         firebaseDatabase = FirebaseDatabase.getInstance()
         dbDatabase = FirebaseDatabase.getInstance().reference
         dbReference = firebaseDatabase.getReference("User")
+        sharedPreference = SharedPreference(this)
 
         binding.imBack.setOnClickListener {
             finish()
@@ -84,6 +87,7 @@ class SignUpActivity : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(User::class.java)
+                sharedPreference.setCurrentUser(user)
                 if (user == null){
                     dbReference.child(username).setValue(data)
                     openActivity(UploadPhotoActivity::class.java, NAME, data.nama)
