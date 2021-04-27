@@ -8,6 +8,7 @@
 package com.syafii.movapps.controller.ticket
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -36,14 +37,18 @@ class TicketPurchasedActivity : AppCompatActivity() {
         sharedPreference = SharedPreference(this)
         adapter = TicketAdapter(this)
 
-        dataList = arrayFromData(sharedPreference.getString(DATA_SEAT))
+        try {
+            dataList = arrayFromData(sharedPreference.getString(DATA_SEAT))
+        } catch (e: Exception) {
+
+        }
+
         val data = Gson().fromJson(sharedPreference.getString(MOVIE_DATA), Film::class.java)
 
         Glide.with(this).load(data.poster).error(R.drawable.ic_profile).into(binding.imPoster)
         binding.tvTitle.text = data.judul
         binding.tvGenre.text = data.genre
         binding.tvRating.text = data.rating
-
         binding.rvItemSeat.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvItemSeat.isNestedScrollingEnabled = false
