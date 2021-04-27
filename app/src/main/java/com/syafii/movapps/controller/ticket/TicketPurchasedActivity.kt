@@ -8,7 +8,6 @@
 package com.syafii.movapps.controller.ticket
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -37,6 +36,7 @@ class TicketPurchasedActivity : AppCompatActivity() {
         sharedPreference = SharedPreference(this)
         adapter = TicketAdapter(this)
 
+        //this is for handle if data not available or not
         try {
             dataList = arrayFromData(sharedPreference.getString(DATA_SEAT))
         } catch (e: Exception) {
