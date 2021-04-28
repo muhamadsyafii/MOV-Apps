@@ -83,13 +83,8 @@ class HomeFragment : Fragment() {
         //this is swipeRefresh for load again data
         binding.swipeRefresh.setOnRefreshListener {
             (Objects.requireNonNull(activity) as MainActivity).syncMember()
-            try {
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
             updateProfile()
             getData()
-
             binding.shimmerNowPlaying.visibility = View.VISIBLE
             binding.shimmerNowPlaying.startShimmer()
             binding.shimmerComingSoon.visibility = View.VISIBLE
