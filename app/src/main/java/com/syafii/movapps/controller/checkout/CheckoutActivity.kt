@@ -46,8 +46,10 @@ class CheckoutActivity : AppCompatActivity() {
         }
         dataList.add(Checkout("Total Harus bayar", total.toString()))
 
-        if (user != null) {
-            currency(user.saldo.toDouble(), binding.tvSaldo)
+        if (user?.saldo == "") {
+            currency(0.0, binding.tvSaldo)
+        } else {
+            user?.saldo?.toDouble()?.let { currency(it, binding.tvSaldo) }
         }
 
         adapter = CheckoutAdapter(dataList)

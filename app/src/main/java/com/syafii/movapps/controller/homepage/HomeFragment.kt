@@ -70,11 +70,11 @@ class HomeFragment : Fragment() {
         dbReference = FirebaseDatabase.getInstance().getReference("Film")
 
         try {
-            updateProfile()
-            getData()
         } catch (e: Exception) {
             e.printStackTrace()
         }
+        updateProfile()
+        getData()
 
 
         //this is add color load for swipe refresh6
@@ -88,17 +88,18 @@ class HomeFragment : Fragment() {
         binding.swipeRefresh.setOnRefreshListener {
             (Objects.requireNonNull(activity) as MainActivity).syncMember()
             try {
-                updateProfile()
-                getData()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+            updateProfile()
+            getData()
+
             binding.shimmerNowPlaying.visibility = View.VISIBLE
             binding.shimmerNowPlaying.startShimmer()
             binding.shimmerComingSoon.visibility = View.VISIBLE
             binding.shimmerComingSoon.startShimmer()
             binding.rvNowPlaying.visibility = View.GONE
-            binding.shimmerComingSoon.visibility = View.GONE
+            binding.shimmerComingSoon.visibility = View.VISIBLE
         }
 
         //this is setup layout manager for recyclerview
@@ -160,7 +161,12 @@ class HomeFragment : Fragment() {
 
         binding.tvName.text = user!!.nama
         binding.tvSaldo.text = user.saldo
-        currency(user.saldo.toDouble(), binding.tvSaldo)
+
+        if (user.saldo == "") {
+            currency(0.0, binding.tvSaldo)
+        } else {
+            currency(user.saldo.toDouble(), binding.tvSaldo)
+        }
 
         //check condition for url have value or not
         if (user.url == "") {

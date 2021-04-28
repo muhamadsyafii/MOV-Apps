@@ -7,18 +7,16 @@
 
 package com.syafii.movapps.controller.profile
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.syafii.movapps.R
 import com.syafii.movapps.controller.editprofile.EditProfileActivity
+import com.syafii.movapps.controller.ewallet.MyWalletActivity
 import com.syafii.movapps.databinding.FragmentProfileBinding
 import com.syafii.movapps.model.User
 import com.syafii.movapps.util.db.DialogUtil
@@ -42,7 +40,7 @@ class ProfileFragment : Fragment() {
         showProfile()
 
         binding.tvWallet.setOnClickListener {
-            showToast("Sorry this feature not available")
+            openActivity(MyWalletActivity::class.java)
         }
 
         binding.tvEditProfile.setOnClickListener {
@@ -63,7 +61,7 @@ class ProfileFragment : Fragment() {
 
     //this is method for update profile
     private fun showProfile() {
-        val user : User? = sharedPreference.getCurrentUser()
+        val user: User? = sharedPreference.getCurrentUser()
 
         binding.tvName.text = user!!.nama
         binding.tvEmail.text = user!!.email

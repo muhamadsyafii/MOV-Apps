@@ -41,5 +41,6 @@
     <string name="txt_my_wallet">My Wallet</string>
     <string name="txt_change_language">Change Language</string>
     <string name="txt_help">Help</string>
+    <string name="txt_topup">Top Up Saldo</string>
 
 </resources>
