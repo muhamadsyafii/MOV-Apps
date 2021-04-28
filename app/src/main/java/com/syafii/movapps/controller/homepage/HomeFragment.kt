@@ -69,10 +69,6 @@ class HomeFragment : Fragment() {
         sharedPreference = SharedPreference(requireContext())
         dbReference = FirebaseDatabase.getInstance().getReference("Film")
 
-        try {
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
         updateProfile()
         getData()
 
